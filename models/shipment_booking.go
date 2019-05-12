@@ -1,29 +1,35 @@
 package models
 
-type ShipmentBooking struct {
-	ApiKey               string      `json:"api_key"`
-	RateId               int         `json:"rate_id"`
-	Carrier              string      `json:"carrier"` // DHL, FedEX, UPS
-	CarrierServiceCode   string      `json:"carrier_service_code"`
-	CarrierAccount       interface{} `json:"carrier_account"`
-	EnviayaAccount       string      `json:"enviaya_account"`
-	OriginDirection      Direction   `json:"origin_direction"`
-	DestinationDirection Direction   `json:"destination_direction"`
-	Shipment             Shipment    `json:"shipment"`
-	LabelFormat          string      `json:"label_format"`
-	Customs              Customs     `json:"customs"` // Mandatory for international packages; See Customs object.
+type ShipmentBookingRequest struct {
+	Accounts
+	APIKey               string    `json:"api_key,omitempty"`
+	RateID               string    `json:"rate_id,omitempty"`
+	Carrier              string    `json:"carrier,omitempty"` // DHL, FedEX, UPS
+	CarrierServiceCode   string    `json:"carrier_service_code,omitempty"`
+	OriginDirection      Direction `json:"origin_direction,omitempty"`
+	DestinationDirection Direction `json:"destination_direction,omitempty"`
+	Shipment             Shipment  `json:"shipment,omitempty"`
+	LabelFormat          string    `json:"label_format,omitempty"`
+	Customs              Customs   `json:"customs,omitempty"` // Mandatory for international packages; See Customs object.
+}
+
+type ShipmentBookingResponse struct {
+	Shipment
+	Error    bool        `json:"bool,omitempty"`
+	Errors   interface{} `json:"errors,omitempty"`
+	Warnings interface{} `json:"warnings,omitempty"`
 }
 
 type Customs struct {
-	DutiesPayment      string      `json:"duties_payment"`
-	TotalDeclaredValue string      `json:"total_declared_value"`
-	Commodities        []Commodity `json:"commodities"`
+	DutiesPayment      string      `json:"duties_payment,omitempty"`
+	TotalDeclaredValue string      `json:"total_declared_value,omitempty"`
+	Commodities        []Commodity `json:"commodities,omitempty"`
 }
 
 type Commodity struct {
-	Quantity             string `json:"quantity"`
-	Description          string `json:"description"`
-	CountryOfManufacture string `json:"country_of_manufacture"`
-	UnitPrice            int    `json:"unit_price"`
-	TotalCustomsValue    int    `json:"total_customs_value"`
+	Quantity             string `json:"quantity,omitempty"`
+	Description          string `json:"description,omitempty"`
+	CountryOfManufacture string `json:"country_of_manufacture,omitempty"`
+	UnitPrice            int    `json:"unit_price,omitempty"`
+	TotalCustomsValue    int    `json:"total_customs_value,omitempty"`
 }

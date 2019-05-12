@@ -13,7 +13,7 @@ import (
 )
 
 // APIURL Base API url
-const APIURL = "https://api224.pakmail.com.mx/api/v1"
+const APIURL = "https://500.api.pakmail.com.mx/api/v1"
 
 type client struct {
 	apiURL string
@@ -76,7 +76,9 @@ func (c *client) send(method, path string, b interface{}) ([]byte, error) {
 	req.Header.Add("content-type", "application/json")
 	req.SetBasicAuth(c.apiKey, "")
 	// NOTE: Seems like basic auth isn't working, so we also set the api key as a query param
-	req.URL.Query().Add("api_key", c.apiKey)
+	q := req.URL.Query()
+	q.Add("api_key", c.apiKey)
+	req.URL.RawQuery = q.Encode()
 
 	// Do http request
 	log.Printf("Calling %s: %s\n", method, req.URL.String())
@@ -109,4 +111,8 @@ func (c *client) send(method, path string, b interface{}) ([]byte, error) {
 // For now this is only used for testing purposes
 func SetClientURL(apiURL string) {
 	getClient().apiURL = apiURL
+}
+
+func SetClientAPIKey(key string) {
+	getClient().apiKey = key
 }

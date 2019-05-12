@@ -6,13 +6,13 @@ package models
 // you can use the field quantity so specify how many parcels you are sending.
 // If dimension or weight differ, you can send several parcel objects in your request.
 type Parcel struct {
-	Quantity      string        `json:"quantity"`       // The quantity of parcels with the same dimensions and weight.
-	Weight        string        `json:"weight"`         // The weight of the parcel.
-	WeightUnit    WeightUnit    `json:"weight_unit"`    // The weight unit used. (kg, lbs)
-	Height        string        `json:"height"`         //The height of the parcel.
-	Length        string        `json:"length"`         // The length of the parcel.
-	Width         string        `json:"width"`          // The width of the parcel.
-	DimensionUnit DimensionUnit `json:"dimension_unit"` // The dimension unit used.
+	Quantity      float64       `json:"quantity,omitempty"`       // The quantity of parcels with the same dimensions and weight.
+	Weight        float64       `json:"weight,omitempty"`         // The weight of the parcel.
+	WeightUnit    WeightUnit    `json:"weight_unit,omitempty"`    // The weight unit used. (kg, lbs)
+	Height        float64       `json:"height,omitempty"`         //The height of the parcel.
+	Length        float64       `json:"length,omitempty"`         // The length of the parcel.
+	Width         float64       `json:"width,omitempty"`          // The width of the parcel.
+	DimensionUnit DimensionUnit `json:"dimension_unit,omitempty"` // The dimension unit used.
 }
 
 const (

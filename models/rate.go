@@ -1,10 +1,11 @@
 package models
 
 type Rate struct {
-	ID                        string               `json:"id"`                           // The ID of the rate.
-	RateID                    string               `json:"rate_id"`                      // The ID of the rate (alternative name).
-	Date                      string               `json:"date"`                         // Date and Time of the rate. This can be important for time definte services, because they might not be delivered on time if shipment is realized until a later hour of the day.
-	Carrier                   string               `json:"carrier"`                      // Carrier providing the service.
+	ID                        string               `json:"id"`      // The ID of the rate.
+	RateID                    string               `json:"rate_id"` // The ID of the rate (alternative name).
+	Date                      string               `json:"date"`    // Date and Time of the rate. This can be important for time definte services, because they might not be delivered on time if shipment is realized until a later hour of the day.
+	Carrier                   string               `json:"carrier"` // Carrier providing the service.
+	DynamicServiceName        string               `json:"dynamic_service_name"`
 	CarrierServiceName        string               `json:"carrier_service_name"`         // The service name used by the carrier.
 	CarrierServiceCode        string               `json:"carrier_service_code"`         // The service code used by the carrier.
 	CarrierLogoURL            string               `json:"carrier_logo_url"`             // The URL to the carrier logo. Can be used if you want to display the carrier logo to your users.
@@ -19,8 +20,8 @@ type Rate struct {
 	PublicTotalAmount         float64              `json:"public_total_amount"`          // The public total amount.
 	PublicTotalAmountCurrency string               `json:"public_total_amount_currency"` // The 3 letter currency code in ISO 4217 alphabetic standard.
 	Currency                  string               `json:"currency"`                     // The 3 letter currency code in ISO 4217 alphabetic standard.
-	ServiceTerms              string               `json:"service_terms"`                // If special terms apply for a service, these are mentioned here.
+	ServiceTerms              interface{}          `json:"service_terms"`                // If special terms apply for a service, these are mentioned here.
 	SurchargesBreakDown       []SurchargeBreakDown `json:"surcharges_break_down"`        // The breakdown of surcharges that apply to your shipment.
-	EnviayaServiceName        string               `json:"enviaya_service_name"`         // A standardized service name assigned by us. This can be used for easier understanding and comparision of the carrier services. Example: "2 day shipping".
-	EnviayaServiceCode        string               `json:"enviaya_service_code"`         // A unique service code assigned by us and used to identify this specific service. Can be used for label creation and pickup service.
+	EnviayaServiceName        interface{}          `json:"enviaya_service_name"`         // A standardized service name assigned by us. This can be used for easier understanding and comparision of the carrier services. Example: "2 day shipping".
+	EnviayaServiceCode        interface{}          `json:"enviaya_service_code"`         // A unique service code assigned by us and used to identify this specific service. Can be used for label creation and pickup service.
 }
